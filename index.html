@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShionHouse — Modern Fashion Store</title>
+  <meta name="description" content="Discover premium fashion at ShionHouse. Shop the latest in clothing, accessories, and more." />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════ TOP BAR ═══════════ -->
+  <div class="topbar">
+    🚚 Free shipping on orders over <span>$60</span> &nbsp;|&nbsp; Use code <span>SHION20</span> for 20% off
+  </div>
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo">Shion<span>House</span></a>
+
+      <!-- Desktop Links -->
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="products.html#new">New Arrivals</a></li>
+        <li><a href="products.html#sale">Sale</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+
+      <!-- Icons -->
+      <div class="nav-icons">
+        <button class="nav-icon-btn" id="searchToggle" aria-label="Search">
+          <i class="bi bi-search"></i>
+        </button>
+        <button class="nav-icon-btn" aria-label="Wishlist">
+          <i class="bi bi-heart"></i>
+        </button>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+
+      <!-- Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div><!-- /nav-inner -->
+
+    <!-- Mobile Dropdown -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="products.html#new">New Arrivals</a>
+      <a href="products.html#sale">Sale</a>
+      <a href="#">About</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════ SEARCH OVERLAY ═══════════ -->
+  <div id="searchOverlay" style="display:none; opacity:0; position:fixed; inset:0; z-index:2000; background:rgba(26,23,20,0.85); align-items:flex-start; justify-content:center; padding-top:120px; transition:opacity 0.25s ease;">
+    <div style="width:100%; max-width:600px; padding:0 24px; position:relative;">
+      <input id="searchInput" class="newsletter-input" type="text" placeholder="Search products..." style="width:100%; padding:18px 24px; font-size:18px; border-radius:4px; background:#fff; color:#1a1714; border:none; outline:none; font-family:'DM Sans',sans-serif;" />
+      <button id="searchClose" style="position:absolute; top:50%; right:40px; transform:translateY(-50%); background:none; border:none; color:#666; font-size:24px; cursor:pointer;">&times;</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ HERO SECTION ═══════════ -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+
+      <div class="hero-text">
+        <span class="hero-eyebrow">New Season 2025</span>
+        <h1 class="hero-title">
+          Fashion<br>
+          <em>changing</em><br>
+          always
+        </h1>
+        <p class="hero-desc">
+          Discover curated collections that define contemporary style. Premium fabrics, timeless silhouettes, and designs that move with you.
+        </p>
+        <div class="hero-actions">
+          <a href="products.html" class="btn-primary">
+            Shop Now <i class="bi bi-arrow-right"></i>
+          </a>
+          <a href="products.html#new" class="btn-ghost">
+            New Arrivals
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <span class="stat-num">4.8k+</span>
+            <span class="stat-label">Products</span>
+          </div>
+          <div>
+            <span class="stat-num">120k</span>
+            <span class="stat-label">Customers</span>
+          </div>
+          <div>
+            <span class="stat-num">98%</span>
+            <span class="stat-label">Satisfaction</span>
+          </div>
+        </div>
+      </div><!-- /hero-text -->
+
+      <div class="hero-visual">
+        <div class="hero-img-tall" style="display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:140px; filter:opacity(0.2);">👗</span>
+        </div>
+        <div class="hero-img-stack">
+          <div class="hero-img-sm" style="display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:72px; filter:opacity(0.18);">👜</span>
+          </div>
+          <div class="hero-img-sm" style="display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:72px; filter:opacity(0.18);">🕶️</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /hero-content -->
+  </section>
+
+  <!-- ═══════════ CATEGORIES ═══════════ -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-label">Shop by Category</span>
+        <h2 class="section-title">Popular <em>Collections</em></h2>
+      </div>
+
+      <div class="categories-grid">
+
+        <a href="products.html?cat=glasses" class="category-card cat-1" data-animate>
+          <div class="category-placeholder">🕶️</div>
+          <div class="category-overlay">
+            <div class="cat-name">Eyewear</div>
+            <div class="cat-count">42 products</div>
+            <span class="cat-btn">Shop Now →</span>
+          </div>
+        </a>
+
+        <a href="products.html?cat=watches" class="category-card cat-2" data-animate>
+          <div class="category-placeholder">⌚</div>
+          <div class="category-overlay">
+            <div class="cat-name">Watches</div>
+            <div class="cat-count">65 products</div>
+            <span class="cat-btn">Shop Now →</span>
+          </div>
+        </a>
+
+        <a href="products.html?cat=jackets" class="category-card cat-3" data-animate>
+          <div class="category-placeholder">🧥</div>
+          <div class="category-overlay">
+            <div class="cat-name">Jackets</div>
+            <div class="cat-count">38 products</div>
+            <span class="cat-btn">Shop Now →</span>
+          </div>
+        </a>
+
+        <a href="products.html?cat=clothing" class="category-card cat-4" data-animate>
+          <div class="category-placeholder">👗</div>
+          <div class="category-overlay">
+            <div class="cat-name">Clothing</div>
+            <div class="cat-count">124 products</div>
+            <span class="cat-btn">Shop Now →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ NEW ARRIVALS (Bootstrap Cards) ═══════════ -->
+  <section class="products-section" id="new">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-label">Just Dropped</span>
+        <h2 class="section-title">New <em>Arrivals</em></h2>
+      </div>
+
+      <!-- Bootstrap row + cards grid -->
+      <div class="row g-4 products-grid">
+
+        <!-- Card 1 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100"
+               data-product-id="p001"
+               data-product-name="Oversized Linen Blazer"
+               data-product-price="89.00"
+               data-product-category="Jackets"
+               data-product-emoji="🧥">
+            <div class="product-card-img">
+              <div class="product-placeholder">🧥</div>
+              <span class="product-badge badge-new">New</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" aria-label="Wishlist" title="Add to Wishlist">♡</button>
+                <button class="action-btn" aria-label="Quick View" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Jackets</div>
+              <h5 class="product-name card-title">Oversized Linen Blazer</h5>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(48)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">$89.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100"
+               data-product-id="p002"
+               data-product-name="Silk Slip Dress"
+               data-product-price="64.00"
+               data-product-category="Clothing"
+               data-product-emoji="👗">
+            <div class="product-card-img">
+              <div class="product-placeholder">👗</div>
+              <span class="product-badge badge-hot">Hot</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" aria-label="Wishlist">♡</button>
+                <button class="action-btn" aria-label="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Clothing</div>
+              <h5 class="product-name card-title">Silk Slip Dress</h5>
+              <div class="product-rating">
+                <span class="stars">★★★★☆</span>
+                <span class="rating-count">(91)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">$64.00</span>
+                <span class="price-old">$80.00</span>
+                <span class="price-discount">−20%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100"
+               data-product-id="p003"
+               data-product-name="Minimalist Watch"
+               data-product-price="149.00"
+               data-product-category="Watches"
+               data-product-emoji="⌚">
+            <div class="product-card-img">
+              <div class="product-placeholder">⌚</div>
+              <span class="product-badge badge-new">New</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" aria-label="Wishlist">♡</button>
+                <button class="action-btn" aria-label="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Watches</div>
+              <h5 class="product-name card-title">Minimalist Watch</h5>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(203)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">$149.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100"
+               data-product-id="p004"
+               data-product-name="Retro Sunglasses"
+               data-product-price="38.00"
+               data-product-category="Eyewear"
+               data-product-emoji="🕶️">
+            <div class="product-card-img">
+              <div class="product-placeholder">🕶️</div>
+              <span class="product-badge badge-sale">Sale</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" aria-label="Wishlist">♡</button>
+                <button class="action-btn" aria-label="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Eyewear</div>
+              <h5 class="product-name card-title">Retro Sunglasses</h5>
+              <div class="product-rating">
+                <span class="stars">★★★★☆</span>
+                <span class="rating-count">(67)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">$38.00</span>
+                <span class="price-old">$55.00</span>
+                <span class="price-discount">−31%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100"
+               data-product-id="p005"
+               data-product-name="Leather Tote Bag"
+               data-product-price="112.00"
+               data-product-category="Bags"
+               data-product-emoji="👜">
+            <div class="product-card-img">
+              <div class="product-placeholder">👜</div>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" aria-label="Wishlist">♡</button>
+                <button class="action-btn" aria-label="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Bags</div>
+              <h5 class="product-name card-title">Leather Tote Bag</h5>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(155)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">$112.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100"
+               data-product-id="p006"
+               data-product-name="Knitted Jumper"
+               data-product-price="72.00"
+               data-product-category="Clothing"
+               data-product-emoji="🧶">
+            <div class="product-card-img">
+              <div class="product-placeholder">🧶</div>
+              <span class="product-badge badge-hot">Hot</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" aria-label="Wishlist">♡</button>
+                <button class="action-btn" aria-label="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Clothing</div>
+              <h5 class="product-name card-title">Knitted Jumper</h5>
+              <div class="product-rating">
+                <span class="stars">★★★★☆</span>
+                <span class="rating-count">(29)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">$72.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100"
+               data-product-id="p007"
+               data-product-name="Lace-Up Ankle Boot"
+               data-product-price="96.00"
+               data-product-category="Footwear"
+               data-product-emoji="👢">
+            <div class="product-card-img">
+              <div class="product-placeholder">👢</div>
+              <span class="product-badge badge-new">New</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" aria-label="Wishlist">♡</button>
+                <button class="action-btn" aria-label="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Footwear</div>
+              <h5 class="product-name card-title">Lace-Up Ankle Boot</h5>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(77)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">$96.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100"
+               data-product-id="p008"
+               data-product-name="Wide-Leg Trousers"
+               data-product-price="58.00"
+               data-product-category="Clothing"
+               data-product-emoji="👖">
+            <div class="product-card-img">
+              <div class="product-placeholder">👖</div>
+              <span class="product-badge badge-sale">Sale</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" aria-label="Wishlist">♡</button>
+                <button class="action-btn" aria-label="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Clothing</div>
+              <h5 class="product-name card-title">Wide-Leg Trousers</h5>
+              <div class="product-rating">
+                <span class="stars">★★★★☆</span>
+                <span class="rating-count">(43)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">$58.00</span>
+                <span class="price-old">$75.00</span>
+                <span class="price-discount">−23%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /row -->
+
+      <!-- Browse All CTA -->
+      <div class="browse-all-wrap" data-animate>
+        <a href="products.html" class="btn-outline-dark-custom">
+          Browse All Products <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+    </div><!-- /container -->
+  </section>
+
+  <!-- ═══════════ PROMO BANNER ═══════════ -->
+  <section class="promo-banner">
+    <div class="container">
+      <div class="promo-inner">
+        <div data-animate>
+          <span class="promo-label">Limited Time Offer</span>
+          <h2 class="promo-title">
+            Our First-Ever<br>
+            <em>Summer</em> Edit
+          </h2>
+          <p class="promo-desc">Hand-picked pieces for the season. Light fabrics, warm tones, and silhouettes made for long days outdoors.</p>
+          <a href="products.html#sale" class="btn-primary">
+            Shop the Edit <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="promo-visual" data-animate>
+          <div class="promo-img" style="font-size:80px;">👒</div>
+          <div class="promo-img" style="font-size:56px;">🌸</div>
+          <div class="promo-img" style="font-size:56px;">👡</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVICES ═══════════ -->
+  <section class="services-section">
+    <div class="container">
+      <div class="services-grid">
+        <div class="service-item" data-animate>
+          <span class="service-icon">🚚</span>
+          <h5 class="service-title">Free Delivery</h5>
+          <p class="service-desc">Free shipping on all orders over $60. Fast and reliable nationwide.</p>
+        </div>
+        <div class="service-item" data-animate>
+          <span class="service-icon">🔄</span>
+          <h5 class="service-title">Easy Returns</h5>
+          <p class="service-desc">30-day hassle-free returns. No questions asked, full refund guaranteed.</p>
+        </div>
+        <div class="service-item" data-animate>
+          <span class="service-icon">🔒</span>
+          <h5 class="service-title">Secure Payment</h5>
+          <p class="service-desc">Your transactions are protected with 256-bit SSL encryption.</p>
+        </div>
+        <div class="service-item" data-animate>
+          <span class="service-icon">💬</span>
+          <h5 class="service-title">24/7 Support</h5>
+          <p class="service-desc">Our customer team is available around the clock to help you out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ NEWSLETTER ═══════════ -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h3>Stay in the Loop</h3>
+          <p>Get exclusive drops, style guides, and member-only discounts.</p>
+        </div>
+        <form class="newsletter-form" novalidate>
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" required />
+          <button type="submit" class="newsletter-submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div>
+          <span class="footer-logo">Shion<span>House</span></span>
+          <p class="footer-about">
+            A modern fashion destination curating the finest in contemporary clothing, accessories, and lifestyle goods. Style that speaks before you do.
+          </p>
+          <div class="footer-social">
+            <button class="social-btn" aria-label="Instagram">IG</button>
+            <button class="social-btn" aria-label="Twitter">TW</button>
+            <button class="social-btn" aria-label="Pinterest">PT</button>
+            <button class="social-btn" aria-label="Facebook">FB</button>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h6 class="footer-heading">Quick Links</h6>
+          <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.html">Home</a>
+            <a href="products.html">Shop</a>
+            <a href="#">About Us</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+          </nav>
+        </div>
+
+        <!-- Shop Categories -->
+        <div>
+          <h6 class="footer-heading">Categories</h6>
+          <nav class="footer-links">
+            <a href="products.html?cat=clothing">Clothing</a>
+            <a href="products.html?cat=jackets">Jackets</a>
+            <a href="products.html?cat=watches">Watches</a>
+            <a href="products.html?cat=glasses">Eyewear</a>
+            <a href="products.html?cat=bags">Bags</a>
+          </nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h6 class="footer-heading">Get in Touch</h6>
+          <div class="footer-contact">
+            <div class="footer-contact-item">
+              <span class="contact-icon">📞</span>
+              <span>(89) 982-278 356</span>
+            </div>
+            <div class="footer-contact-item">
+              <span class="contact-icon">✉️</span>
+              <span>hello@shionhouse.com</span>
+            </div>
+            <div class="footer-contact-item">
+              <span class="contact-icon">📍</span>
+              <span>67/A, Fashion District, NYC</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /footer-grid -->
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid rgba(255,255,255,0.08);">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2025 ShionHouse. All rights reserved.</span>
+          <div style="display:flex; gap:20px;">
+            <a href="#" style="font-size:13px; color:rgba(255,255,255,0.4);">Privacy Policy</a>
+            <a href="#" style="font-size:13px; color:rgba(255,255,255,0.4);">Terms of Use</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+
+</body>
+</html>
