@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShionHouse — Indian Fashion Store</title>
+  <meta name="description" content="Discover premium Indian fashion at ShionHouse. Shop Ethnic Wear, Sarees, Accessories and more." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    🚚 Free shipping on orders over <span>₹999</span> &nbsp;|&nbsp; Use code <span>SHION20</span> for 20% off
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Shion<span>House</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="products.html#new">New Arrivals</a></li>
+        <li><a href="products.html?cat=sale">Sale</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <div class="nav-icons">
+        <button class="nav-icon-btn" id="searchToggle" aria-label="Search"><i class="bi bi-search"></i></button>
+        <button class="nav-icon-btn" aria-label="Wishlist"><i class="bi bi-heart"></i></button>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="products.html#new">New Arrivals</a>
+      <a href="about.html">About</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <!-- SEARCH OVERLAY -->
+  <div id="searchOverlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:2000;background:rgba(26,23,20,0.88);align-items:flex-start;justify-content:center;padding-top:120px;">
+    <div style="width:100%;max-width:600px;padding:0 24px;position:relative;">
+      <input id="searchInput" type="text" placeholder="Search products..." style="width:100%;padding:18px 24px;font-size:18px;border-radius:4px;background:#fff;color:#1a1714;border:none;outline:none;font-family:'DM Sans',sans-serif;" />
+      <button id="searchClose" style="position:absolute;top:50%;right:40px;transform:translateY(-50%);background:none;border:none;color:#888;font-size:28px;cursor:pointer;line-height:1;">&times;</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="hero-eyebrow">New Season 2025 — India</span>
+        <h1 class="hero-title">
+          Indian<br>
+          <em>Fashion</em><br>
+          Redefined
+        </h1>
+        <p class="hero-desc">
+          Discover curated Indian collections — from handwoven Khadi Kurtas and Banarasi Sarees to modern ethnic fusion. Premium craftsmanship, timeless silhouettes.
+        </p>
+        <div class="hero-actions">
+          <a href="products.html" class="btn-primary">Shop Now <i class="bi bi-arrow-right"></i></a>
+          <a href="products.html#new" class="btn-ghost">New Arrivals</a>
+        </div>
+        <div class="hero-stats">
+          <div><span class="stat-num">4.8k+</span><span class="stat-label">Products</span></div>
+          <div><span class="stat-num">1.2L+</span><span class="stat-label">Customers</span></div>
+          <div><span class="stat-num">98%</span><span class="stat-label">Satisfaction</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img-tall" style="display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:140px;filter:opacity(0.2);">🥻</span>
+        </div>
+        <div class="hero-img-stack">
+          <div class="hero-img-sm" style="display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:72px;filter:opacity(0.18);">👜</span>
+          </div>
+          <div class="hero-img-sm" style="display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:72px;filter:opacity(0.18);">⌚</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-label">Shop by Category</span>
+        <h2 class="section-title">Popular <em>Collections</em></h2>
+      </div>
+      <div class="categories-grid">
+        <a href="products.html?category=Ethnic+Wear" class="category-card cat-1" data-animate>
+          <div class="category-placeholder">👘</div>
+          <div class="category-overlay">
+            <div class="cat-name">Ethnic Wear</div>
+            <div class="cat-count">56 products</div>
+            <span class="cat-btn">Shop Now →</span>
+          </div>
+        </a>
+        <a href="products.html?category=Sarees" class="category-card cat-2" data-animate>
+          <div class="category-placeholder">🥻</div>
+          <div class="category-overlay">
+            <div class="cat-name">Sarees</div>
+            <div class="cat-count">84 products</div>
+            <span class="cat-btn">Shop Now →</span>
+          </div>
+        </a>
+        <a href="products.html?category=Watches" class="category-card cat-3" data-animate>
+          <div class="category-placeholder">⌚</div>
+          <div class="category-overlay">
+            <div class="cat-name">Watches</div>
+            <div class="cat-count">38 products</div>
+            <span class="cat-btn">Shop Now →</span>
+          </div>
+        </a>
+        <a href="products.html?category=Clothing" class="category-card cat-4" data-animate>
+          <div class="category-placeholder">👗</div>
+          <div class="category-overlay">
+            <div class="cat-name">Clothing</div>
+            <div class="cat-count">124 products</div>
+            <span class="cat-btn">Shop Now →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS -->
+  <section class="products-section" id="new">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-label">Just Dropped</span>
+        <h2 class="section-title">New <em>Arrivals</em></h2>
+      </div>
+      <div class="row g-4">
+
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p001" data-product-name="Khadi Cotton Kurta" data-product-price="1299" data-product-category="Ethnic Wear" data-product-emoji="👘">
+            <div class="product-card-img">
+              <div class="product-placeholder">👘</div>
+              <span class="product-badge badge-new">New</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Ethnic Wear</div>
+              <h5 class="product-name card-title">Khadi Cotton Kurta</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(148)</span></div>
+              <div class="product-price"><span class="price-current">₹1,299</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p002" data-product-name="Banarasi Silk Saree" data-product-price="4599" data-product-category="Sarees" data-product-emoji="🥻">
+            <div class="product-card-img">
+              <div class="product-placeholder">🥻</div>
+              <span class="product-badge badge-sale">Sale</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Sarees</div>
+              <h5 class="product-name card-title">Banarasi Silk Saree</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(221)</span></div>
+              <div class="product-price">
+                <span class="price-current">₹4,599</span>
+                <span class="price-old">₹5,999</span>
+                <span class="price-discount">−23%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p006" data-product-name="Embroidered Potli Bag" data-product-price="1799" data-product-category="Bags" data-product-emoji="👜">
+            <div class="product-card-img">
+              <div class="product-placeholder">👜</div>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Bags</div>
+              <h5 class="product-name card-title">Embroidered Potli Bag</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(165)</span></div>
+              <div class="product-price"><span class="price-current">₹1,799</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p010" data-product-name="Anarkali Kurta Set" data-product-price="2799" data-product-category="Ethnic Wear" data-product-emoji="👗">
+            <div class="product-card-img">
+              <div class="product-placeholder">👗</div>
+              <span class="product-badge badge-sale">Sale</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Ethnic Wear</div>
+              <h5 class="product-name card-title">Anarkali Kurta Set</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(190)</span></div>
+              <div class="product-price">
+                <span class="price-current">₹2,799</span>
+                <span class="price-old">₹3,499</span>
+                <span class="price-discount">−20%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="browse-all-wrap" data-animate>
+        <a href="products.html" class="btn-outline-dark-custom">Browse All Products <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO BANNER -->
+  <section class="promo-banner">
+    <div class="container">
+      <div class="promo-inner">
+        <div data-animate>
+          <span class="promo-label">Limited Time Offer</span>
+          <h2 class="promo-title">Festive Season<br><em>Dhamaka</em> Sale</h2>
+          <p class="promo-desc">Hand-picked pieces for every Indian festival. Vibrant colours, fine fabrics, and silhouettes crafted for every celebration.</p>
+          <a href="products.html" class="btn-primary">Shop the Festive Edit <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="promo-visual" data-animate>
+          <div class="promo-img" style="font-size:80px;">🥻</div>
+          <div class="promo-img" style="font-size:56px;">🪔</div>
+          <div class="promo-img" style="font-size:56px;">💎</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section">
+    <div class="container">
+      <div class="services-grid">
+        <div class="service-item" data-animate>
+          <span class="service-icon">🚚</span>
+          <h5 class="service-title">Free Delivery</h5>
+          <p class="service-desc">Free shipping across India on all orders over ₹999. Fast and reliable Pan-India delivery.</p>
+        </div>
+        <div class="service-item" data-animate>
+          <span class="service-icon">🔄</span>
+          <h5 class="service-title">Easy Returns</h5>
+          <p class="service-desc">30-day hassle-free returns. Full refund or exchange guaranteed.</p>
+        </div>
+        <div class="service-item" data-animate>
+          <span class="service-icon">🔒</span>
+          <h5 class="service-title">Secure Payment</h5>
+          <p class="service-desc">UPI, Cards, Net Banking — all protected with 256-bit SSL encryption.</p>
+        </div>
+        <div class="service-item" data-animate>
+          <span class="service-icon">💬</span>
+          <h5 class="service-title">24/7 Support</h5>
+          <p class="service-desc">Our Indian customer support team is available around the clock on WhatsApp & phone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h3>Stay in the Loop</h3>
+          <p>Get exclusive drops, style guides, and member-only discounts.</p>
+        </div>
+        <form class="newsletter-form" novalidate>
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" required />
+          <button type="submit" class="newsletter-submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="footer-logo">Shion<span>House</span></span>
+          <p class="footer-about">A modern Indian fashion destination curating the finest in ethnic wear, accessories, and lifestyle goods. Where tradition meets contemporary style.</p>
+          <div class="footer-social">
+            <button class="social-btn">IG</button>
+            <button class="social-btn">WA</button>
+            <button class="social-btn">PT</button>
+            <button class="social-btn">FB</button>
+          </div>
+        </div>
+        <div>
+          <h6 class="footer-heading">Quick Links</h6>
+          <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="products.html">Shop</a>
+            <a href="about.html">About Us</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h6 class="footer-heading">Categories</h6>
+          <nav class="footer-links">
+            <a href="products.html?category=Ethnic+Wear">Ethnic Wear</a>
+            <a href="products.html?category=Sarees">Sarees</a>
+            <a href="products.html?category=Watches">Watches</a>
+            <a href="products.html?category=Eyewear">Eyewear</a>
+            <a href="products.html?category=Bags">Bags</a>
+          </nav>
+        </div>
+        <div>
+          <h6 class="footer-heading">Get in Touch</h6>
+          <div class="footer-contact">
+            <div class="footer-contact-item"><span class="contact-icon">📞</span><span>+91 98765 43210</span></div>
+            <div class="footer-contact-item"><span class="contact-icon">✉️</span><span>hello@shionhouse.in</span></div>
+            <div class="footer-contact-item"><span class="contact-icon">📍</span><span>12-A, Fashion Street, Mumbai 400001</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.08);">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2025 ShionHouse. All rights reserved.</span>
+          <div style="display:flex;gap:20px;">
+            <a href="#" style="font-size:13px;color:rgba(255,255,255,0.4);">Privacy Policy</a>
+            <a href="#" style="font-size:13px;color:rgba(255,255,255,0.4);">Terms of Use</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

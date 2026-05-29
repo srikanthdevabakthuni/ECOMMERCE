@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — ShionHouse India</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    🚚 Free shipping on orders over <span>₹999</span> &nbsp;|&nbsp; Use code <span>SHION20</span> for 20% off
+  </div>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Shion<span>House</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Shop</a></li>
+        <li><a href="products.html#new">New Arrivals</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <div class="nav-icons">
+        <button class="nav-icon-btn" id="searchToggle"><i class="bi bi-search"></i></button>
+        <button class="nav-icon-btn"><i class="bi bi-heart"></i></button>
+        <a href="cart.html" class="nav-icon-btn">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <!-- SEARCH OVERLAY -->
+  <div id="searchOverlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:2000;background:rgba(26,23,20,0.88);align-items:flex-start;justify-content:center;padding-top:120px;">
+    <div style="width:100%;max-width:600px;padding:0 24px;position:relative;">
+      <input id="searchInput" type="text" placeholder="Search products..." style="width:100%;padding:18px 24px;font-size:18px;border-radius:4px;background:#fff;color:#1a1714;border:none;outline:none;font-family:'DM Sans',sans-serif;" />
+      <button id="searchClose" style="position:absolute;top:50%;right:40px;transform:translateY(-50%);background:none;border:none;color:#888;font-size:28px;cursor:pointer;line-height:1;">&times;</button>
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div style="background:var(--clr-dark);padding:60px 0;text-align:center;">
+    <div class="container">
+      <span style="font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--clr-accent);display:block;margin-bottom:12px;">Discover</span>
+      <h1 style="font-family:var(--ff-display);font-size:clamp(36px,5vw,64px);font-weight:300;color:#fff;">
+        All <em style="font-style:italic;color:var(--clr-accent);">Collections</em>
+      </h1>
+      <p style="color:rgba(255,255,255,0.5);margin-top:12px;font-size:14px;">
+        <a href="index.html" style="color:rgba(255,255,255,0.4);">Home</a> &nbsp;/&nbsp; Shop
+      </p>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filterBar">
+    <div class="container">
+      <div class="filter-bar-inner">
+        <div class="filter-search-wrap">
+          <i class="bi bi-search"></i>
+          <input type="text" class="filter-search" id="productSearch" placeholder="Search products..." />
+        </div>
+        <div class="filter-pills">
+          <button class="filter-pill active" data-category="All">All</button>
+          <button class="filter-pill" data-category="Ethnic Wear">Ethnic Wear</button>
+          <button class="filter-pill" data-category="Sarees">Sarees</button>
+          <button class="filter-pill" data-category="Clothing">Clothing</button>
+          <button class="filter-pill" data-category="Watches">Watches</button>
+          <button class="filter-pill" data-category="Eyewear">Eyewear</button>
+          <button class="filter-pill" data-category="Bags">Bags</button>
+          <button class="filter-pill" data-category="Shoes">Shoes</button>
+        </div>
+        <select class="sort-select" id="sortSelect">
+          <option value="default">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name">Name: A–Z</option>
+        </select>
+        <span class="results-count" id="resultsCount">12 products</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS SECTION -->
+  <section class="products-section" id="new">
+    <div class="container">
+      <div class="no-results" id="noResults">
+        <div class="no-results-icon">🔍</div>
+        <h4>No products found</h4>
+        <p style="color:var(--clr-mid);font-size:14px;">Try a different search term or browse all categories.</p>
+      </div>
+
+      <div class="row g-4" id="productGrid">
+
+        <!-- p001 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p001" data-product-name="Khadi Cotton Kurta" data-product-price="1299" data-product-category="Ethnic Wear" data-product-emoji="👘">
+            <div class="product-card-img">
+              <div class="product-placeholder">👘</div>
+              <span class="product-badge badge-new">New</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Ethnic Wear</div>
+              <h5 class="product-name card-title">Khadi Cotton Kurta</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(148)</span></div>
+              <div class="product-price"><span class="price-current">₹1,299</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p002 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p002" data-product-name="Banarasi Silk Saree" data-product-price="4599" data-product-category="Sarees" data-product-emoji="🥻">
+            <div class="product-card-img">
+              <div class="product-placeholder">🥻</div>
+              <span class="product-badge badge-sale">Sale</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Sarees</div>
+              <h5 class="product-name card-title">Banarasi Silk Saree</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(221)</span></div>
+              <div class="product-price">
+                <span class="price-current">₹4,599</span>
+                <span class="price-old">₹5,999</span>
+                <span class="price-discount">−23%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p003 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p003" data-product-name="Titan Raga Watch" data-product-price="8999" data-product-category="Watches" data-product-emoji="⌚">
+            <div class="product-card-img">
+              <div class="product-placeholder">⌚</div>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Watches</div>
+              <h5 class="product-name card-title">Titan Raga Watch</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(303)</span></div>
+              <div class="product-price"><span class="price-current">₹8,999</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p004 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p004" data-product-name="Palazzo Pants Set" data-product-price="1899" data-product-category="Clothing" data-product-emoji="👖">
+            <div class="product-card-img">
+              <div class="product-placeholder">👖</div>
+              <span class="product-badge badge-hot">Hot</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Clothing</div>
+              <h5 class="product-name card-title">Palazzo Pants Set</h5>
+              <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-count">(73)</span></div>
+              <div class="product-price">
+                <span class="price-current">₹1,899</span>
+                <span class="price-old">₹2,499</span>
+                <span class="price-discount">−24%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p005 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p005" data-product-name="Aviator Sunglasses" data-product-price="1499" data-product-category="Eyewear" data-product-emoji="🕶️">
+            <div class="product-card-img">
+              <div class="product-placeholder">🕶️</div>
+              <span class="product-badge badge-new">New</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Eyewear</div>
+              <h5 class="product-name card-title">Aviator Sunglasses</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(97)</span></div>
+              <div class="product-price"><span class="price-current">₹1,499</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p006 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p006" data-product-name="Embroidered Potli Bag" data-product-price="1799" data-product-category="Bags" data-product-emoji="👜">
+            <div class="product-card-img">
+              <div class="product-placeholder">👜</div>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Bags</div>
+              <h5 class="product-name card-title">Embroidered Potli Bag</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(165)</span></div>
+              <div class="product-price"><span class="price-current">₹1,799</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p007 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p007" data-product-name="Pashmina Shawl" data-product-price="3299" data-product-category="Clothing" data-product-emoji="🧣">
+            <div class="product-card-img">
+              <div class="product-placeholder">🧣</div>
+              <span class="product-badge badge-sale">Sale</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Clothing</div>
+              <h5 class="product-name card-title">Pashmina Shawl</h5>
+              <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-count">(82)</span></div>
+              <div class="product-price">
+                <span class="price-current">₹3,299</span>
+                <span class="price-old">₹4,200</span>
+                <span class="price-discount">−21%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p008 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p008" data-product-name="Kolhapuri Chappals" data-product-price="1199" data-product-category="Shoes" data-product-emoji="👡">
+            <div class="product-card-img">
+              <div class="product-placeholder">👡</div>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Shoes</div>
+              <h5 class="product-name card-title">Kolhapuri Chappals</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(109)</span></div>
+              <div class="product-price"><span class="price-current">₹1,199</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p009 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p009" data-product-name="Jute Shoulder Tote" data-product-price="999" data-product-category="Bags" data-product-emoji="🛍️">
+            <div class="product-card-img">
+              <div class="product-placeholder">🛍️</div>
+              <span class="product-badge badge-new">New</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Bags</div>
+              <h5 class="product-name card-title">Jute Shoulder Tote</h5>
+              <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-count">(54)</span></div>
+              <div class="product-price"><span class="price-current">₹999</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p010 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p010" data-product-name="Anarkali Kurta Set" data-product-price="2799" data-product-category="Ethnic Wear" data-product-emoji="👗">
+            <div class="product-card-img">
+              <div class="product-placeholder">👗</div>
+              <span class="product-badge badge-sale">Sale</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Ethnic Wear</div>
+              <h5 class="product-name card-title">Anarkali Kurta Set</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(190)</span></div>
+              <div class="product-price">
+                <span class="price-current">₹2,799</span>
+                <span class="price-old">₹3,499</span>
+                <span class="price-discount">−20%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p011 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p011" data-product-name="Fastrack Chronograph" data-product-price="5499" data-product-category="Watches" data-product-emoji="⏱️">
+            <div class="product-card-img">
+              <div class="product-placeholder">⏱️</div>
+              <span class="product-badge badge-hot">Hot</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Watches</div>
+              <h5 class="product-name card-title">Fastrack Chronograph</h5>
+              <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(76)</span></div>
+              <div class="product-price"><span class="price-current">₹5,499</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- p012 -->
+        <div class="col-lg-3 col-md-4 col-sm-6" data-animate>
+          <div class="card product-card h-100" data-product-id="p012" data-product-name="Rajasthani Lac Bangles Set" data-product-price="499" data-product-category="Eyewear" data-product-emoji="💎">
+            <div class="product-card-img">
+              <div class="product-placeholder">💎</div>
+              <span class="product-badge badge-new">New</span>
+              <div class="product-actions">
+                <button class="action-btn" data-action="wishlist" title="Wishlist">♡</button>
+                <button class="action-btn" title="Quick View">⊕</button>
+              </div>
+              <div class="add-to-cart-overlay" data-action="add-to-cart">Add to Cart</div>
+            </div>
+            <div class="product-card-body card-body">
+              <div class="product-category">Eyewear</div>
+              <h5 class="product-name card-title">Rajasthani Lac Bangles Set</h5>
+              <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-count">(39)</span></div>
+              <div class="product-price"><span class="price-current">₹499</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h3>Stay in the Loop</h3>
+          <p>Get exclusive drops, style guides, and member-only discounts.</p>
+        </div>
+        <form class="newsletter-form" novalidate>
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" required />
+          <button type="submit" class="newsletter-submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div style="border-top:1px solid rgba(255,255,255,0.08);">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2025 ShionHouse. All rights reserved.</span>
+          <a href="index.html" style="color:var(--clr-accent);">← Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(location.search);
+      const cat = params.get('category');
+      if (cat) {
+        const pill = document.querySelector(`.filter-pill[data-category="${cat}"]`);
+        if (pill) pill.click();
+      }
+    });
+  </script>
+</body>
+</html>

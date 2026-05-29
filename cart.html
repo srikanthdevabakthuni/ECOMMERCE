@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart — ShionHouse India</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Checkout Modal Styles ── */
+    #checkoutOverlay {
+      position:fixed;inset:0;z-index:4000;background:rgba(26,23,20,0.82);
+      display:flex;align-items:center;justify-content:center;padding:16px;
+      backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s ease;
+    }
+    #checkoutOverlay.open { opacity:1; pointer-events:all; }
+    .checkout-modal {
+      background:#fff;border-radius:12px;width:100%;max-width:560px;
+      max-height:92vh;overflow-y:auto;padding:36px 40px 40px;position:relative;
+      transform:translateY(24px);transition:transform .3s ease;
+      font-family:'DM Sans',sans-serif;
+    }
+    #checkoutOverlay.open .checkout-modal { transform:translateY(0); }
+    .co-close {
+      position:absolute;top:14px;right:18px;background:none;border:none;
+      font-size:26px;cursor:pointer;color:#aaa;line-height:1;transition:color .2s;
+    }
+    .co-close:hover { color:#1a1714; }
+    .co-title {
+      font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;
+      margin-bottom:6px;color:#1a1714;
+    }
+    .co-subtitle { font-size:13px;color:#888;margin-bottom:28px; }
+    .co-section-title {
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--clr-accent);font-weight:600;margin-bottom:14px;margin-top:24px;
+    }
+    .co-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+    .co-grid.full { grid-template-columns:1fr; }
+    .co-field { display:flex;flex-direction:column;gap:5px; }
+    .co-field label {
+      font-size:11px;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;color:#4a443e;
+    }
+    .co-field input, .co-field select {
+      padding:11px 13px;border:1.5px solid #e6dfd6;border-radius:5px;
+      font-size:13.5px;font-family:'DM Sans',sans-serif;color:#1a1714;
+      outline:none;background:#faf8f5;transition:border-color .2s,box-shadow .2s;
+    }
+    .co-field input:focus,.co-field select:focus {
+      border-color:var(--clr-accent);box-shadow:0 0 0 3px rgba(200,169,110,.15);background:#fff;
+    }
+    .co-field input.is-error { border-color:#e74c3c; }
+    .co-field input.is-valid, .co-field select.is-valid { border-color:#27ae60; }
+    .co-err { font-size:11.5px;color:#e74c3c;min-height:15px; }
+    .co-divider { border:none;border-top:1px solid var(--clr-border);margin:20px 0; }
+    .co-pay-options { display:flex;flex-wrap:wrap;gap:10px;margin-top:4px; }
+    .co-pay-option {
+      display:flex;align-items:center;gap:8px;padding:10px 16px;
+      border:1.5px solid #e6dfd6;border-radius:5px;cursor:pointer;
+      font-size:13px;transition:border-color .2s,background .2s;flex:1;min-width:120px;
+    }
+    .co-pay-option:has(input:checked) {
+      border-color:var(--clr-accent);background:rgba(200,169,110,.07);
+    }
+    .co-pay-option input { accent-color:var(--clr-accent); }
+    .co-summary-mini {
+      background:#faf8f5;border-radius:6px;padding:16px;margin-bottom:20px;
+      border:1px solid var(--clr-border);
+    }
+    .co-summary-mini .s-row {
+      display:flex;justify-content:space-between;font-size:13px;
+      color:var(--clr-mid);margin-bottom:8px;
+    }
+    .co-summary-mini .s-total {
+      display:flex;justify-content:space-between;
+      font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;
+      border-top:1px solid var(--clr-border);padding-top:10px;margin-top:4px;
+    }
+    .co-submit-btn {
+      width:100%;padding:15px;background:#1a1714;color:#fff;border:none;
+      border-radius:5px;font-size:14px;font-weight:500;letter-spacing:.06em;
+      cursor:pointer;margin-top:20px;transition:background .2s,transform .15s;
+      font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .co-submit-btn:hover { background:var(--clr-accent);color:#1a1714; }
+    .co-submit-btn:active { transform:scale(.98); }
+    .co-secure { text-align:center;font-size:11px;color:#aaa;margin-top:12px; }
+
+    /* Success screen */
+    .co-success {
+      text-align:center;padding:40px 20px;display:none;
+    }
+    .co-success-icon { font-size:64px;margin-bottom:16px; }
+    .co-success h3 { font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;margin-bottom:8px; }
+    .co-success p { color:#888;font-size:14px;margin-bottom:24px; }
+
+    @media(max-width:480px) {
+      .checkout-modal { padding:28px 18px 32px; }
+      .co-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    🚚 Free shipping on orders over <span>₹999</span> &nbsp;|&nbsp; Use code <span>SHION20</span> for 20% off
+  </div>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Shion<span>House</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="products.html#new">New Arrivals</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <div class="nav-icons">
+        <button class="nav-icon-btn" id="searchToggle"><i class="bi bi-search"></i></button>
+        <button class="nav-icon-btn"><i class="bi bi-heart"></i></button>
+        <a href="cart.html" class="nav-icon-btn">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <!-- SEARCH OVERLAY -->
+  <div id="searchOverlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:2000;background:rgba(26,23,20,0.88);align-items:flex-start;justify-content:center;padding-top:120px;">
+    <div style="width:100%;max-width:600px;padding:0 24px;position:relative;">
+      <input id="searchInput" type="text" placeholder="Search products..." style="width:100%;padding:18px 24px;font-size:18px;border-radius:4px;background:#fff;color:#1a1714;border:none;outline:none;font-family:'DM Sans',sans-serif;" />
+      <button id="searchClose" style="position:absolute;top:50%;right:40px;transform:translateY(-50%);background:none;border:none;color:#888;font-size:28px;cursor:pointer;line-height:1;">&times;</button>
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div style="background:var(--clr-dark);padding:60px 0;text-align:center;">
+    <div class="container">
+      <span style="font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--clr-accent);display:block;margin-bottom:12px;">Your</span>
+      <h1 style="font-family:var(--ff-display);font-size:clamp(36px,5vw,64px);font-weight:300;color:#fff;">
+        Shopping <em style="font-style:italic;color:var(--clr-accent);">Cart</em>
+      </h1>
+      <p style="color:rgba(255,255,255,0.5);margin-top:12px;font-size:14px;">
+        <a href="index.html" style="color:rgba(255,255,255,0.4);">Home</a> &nbsp;/&nbsp; Cart
+      </p>
+    </div>
+  </div>
+
+  <!-- CART CONTENT -->
+  <section style="padding:72px 0;background:var(--clr-bg);">
+    <div class="container">
+      <div class="row g-4" id="cartView">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkoutOverlay">
+    <div class="checkout-modal">
+      <button class="co-close" id="coClose">&times;</button>
+
+      <!-- FORM VIEW -->
+      <div id="coForm">
+        <h2 class="co-title">Checkout</h2>
+        <p class="co-subtitle">Complete your order details below.</p>
+
+        <!-- Order Mini Summary -->
+        <div class="co-summary-mini" id="coMiniSummary"></div>
+
+        <!-- Contact -->
+        <div class="co-section-title">Contact Information</div>
+        <div class="co-grid">
+          <div class="co-field">
+            <label>Full Name *</label>
+            <input type="text" id="co-name" placeholder="Riya Sharma" />
+            <span class="co-err" id="co-name-err"></span>
+          </div>
+          <div class="co-field">
+            <label>Mobile Number *</label>
+            <input type="tel" id="co-phone" placeholder="+91 98765 43210" />
+            <span class="co-err" id="co-phone-err"></span>
+          </div>
+        </div>
+        <div class="co-grid full" style="margin-top:14px;">
+          <div class="co-field">
+            <label>Email Address *</label>
+            <input type="email" id="co-email" placeholder="you@email.com" />
+            <span class="co-err" id="co-email-err"></span>
+          </div>
+        </div>
+
+        <hr class="co-divider" />
+
+        <!-- Shipping -->
+        <div class="co-section-title">Shipping Address</div>
+        <div class="co-grid full">
+          <div class="co-field">
+            <label>Address Line 1 *</label>
+            <input type="text" id="co-addr1" placeholder="Flat / House No., Building, Street" />
+            <span class="co-err" id="co-addr1-err"></span>
+          </div>
+        </div>
+        <div class="co-grid full" style="margin-top:14px;">
+          <div class="co-field">
+            <label>Address Line 2</label>
+            <input type="text" id="co-addr2" placeholder="Area, Colony, Locality (optional)" />
+          </div>
+        </div>
+        <div class="co-grid" style="margin-top:14px;">
+          <div class="co-field">
+            <label>City *</label>
+            <input type="text" id="co-city" placeholder="Mumbai" />
+            <span class="co-err" id="co-city-err"></span>
+          </div>
+          <div class="co-field">
+            <label>State *</label>
+            <select id="co-state">
+              <option value="">Select State</option>
+              <option>Andhra Pradesh</option><option>Arunachal Pradesh</option>
+              <option>Assam</option><option>Bihar</option><option>Chhattisgarh</option>
+              <option>Goa</option><option>Gujarat</option><option>Haryana</option>
+              <option>Himachal Pradesh</option><option>Jharkhand</option>
+              <option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
+              <option>Maharashtra</option><option>Manipur</option><option>Meghalaya</option>
+              <option>Mizoram</option><option>Nagaland</option><option>Odisha</option>
+              <option>Punjab</option><option>Rajasthan</option><option>Sikkim</option>
+              <option>Tamil Nadu</option><option>Telangana</option><option>Tripura</option>
+              <option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
+              <option>Delhi</option><option>Jammu & Kashmir</option>
+            </select>
+            <span class="co-err" id="co-state-err"></span>
+          </div>
+        </div>
+        <div class="co-grid" style="margin-top:14px;">
+          <div class="co-field">
+            <label>PIN Code *</label>
+            <input type="text" id="co-pin" placeholder="400001" maxlength="6" />
+            <span class="co-err" id="co-pin-err"></span>
+          </div>
+          <div class="co-field">
+            <label>Landmark</label>
+            <input type="text" id="co-landmark" placeholder="Near Metro Station (optional)" />
+          </div>
+        </div>
+
+        <hr class="co-divider" />
+
+        <!-- Payment -->
+        <div class="co-section-title">Payment Method</div>
+        <div class="co-pay-options">
+          <label class="co-pay-option">
+            <input type="radio" name="payMethod" value="upi" checked /> 📲 UPI
+          </label>
+          <label class="co-pay-option">
+            <input type="radio" name="payMethod" value="card" /> 💳 Card
+          </label>
+          <label class="co-pay-option">
+            <input type="radio" name="payMethod" value="netbanking" /> 🏦 Net Banking
+          </label>
+          <label class="co-pay-option">
+            <input type="radio" name="payMethod" value="cod" /> 📦 Cash on Delivery
+          </label>
+        </div>
+        <span class="co-err" id="co-pay-err" style="margin-top:6px;display:block;"></span>
+
+        <!-- UPI ID field (shown when UPI selected) -->
+        <div id="upiField" style="margin-top:14px;">
+          <div class="co-field">
+            <label>UPI ID *</label>
+            <input type="text" id="co-upi" placeholder="yourname@upi" />
+            <span class="co-err" id="co-upi-err"></span>
+          </div>
+        </div>
+
+        <button class="co-submit-btn" id="coSubmit">
+          Place Order <i class="bi bi-check-circle"></i>
+        </button>
+        <p class="co-secure">🔒 Secured by 256-bit SSL &nbsp;·&nbsp; 🔄 30-day returns &nbsp;·&nbsp; ✅ GST Invoice included</p>
+      </div>
+
+      <!-- SUCCESS VIEW -->
+      <div class="co-success" id="coSuccess">
+        <div class="co-success-icon">🎉</div>
+        <h3>Order Placed!</h3>
+        <p>Thank you for shopping with ShionHouse.<br>Your order confirmation has been sent to your email.</p>
+        <a href="products.html" class="btn-primary" style="display:inline-flex;gap:8px;align-items:center;">
+          Continue Shopping <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div style="border-top:1px solid rgba(255,255,255,0.08);">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2025 ShionHouse. All rights reserved.</span>
+          <a href="products.html" style="color:var(--clr-accent);">← Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    /* ── Coupon Codes ── */
+    const COUPONS = { SHION20: 20, SAVE10: 10, WELCOME15: 15, FESTIVE25: 25 };
+    let appliedDiscount = 0;
+
+    function fmt(n) { return '₹' + parseInt(n).toLocaleString('en-IN'); }
+
+    function renderCart() {
+      const container = document.getElementById('cartView');
+      const cart = CartManager.get();
+
+      if (!cart.length) {
+        container.innerHTML = `
+          <div class="col-12">
+            <div class="empty-cart">
+              <div class="empty-cart-icon">🛍️</div>
+              <h3>Your cart is empty</h3>
+              <p>Looks like you haven't added anything yet. Let's fix that.</p>
+              <a href="products.html" class="btn-primary" style="display:inline-flex;gap:8px;align-items:center;">
+                Browse Products <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>`;
+        return;
+      }
+
+      const itemsHTML = cart.map(item => `
+        <div class="cart-row" data-id="${item.id}">
+          <div class="cart-thumb">${item.emoji}</div>
+          <div>
+            <div class="cart-item-cat">${item.category}</div>
+            <div class="cart-item-name">${item.name}</div>
+            <div style="font-size:13px;color:var(--clr-accent);margin-top:2px;">${fmt(item.price)} each</div>
+          </div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('${item.id}', ${item.qty - 1})">−</button>
+            <input class="qty-num" type="number" value="${item.qty}" min="1" onchange="changeQty('${item.id}', this.value)" />
+            <button class="qty-btn" onclick="changeQty('${item.id}', ${item.qty + 1})">+</button>
+          </div>
+          <div style="font-family:var(--ff-display);font-size:18px;font-weight:600;min-width:90px;text-align:right;">
+            ${fmt(item.price * item.qty)}
+          </div>
+          <button class="remove-btn" onclick="removeItem('${item.id}')" title="Remove">✕</button>
+        </div>`).join('');
+
+      const subtotal = parseFloat(CartManager.total());
+      const discountAmt = appliedDiscount > 0 ? Math.round(subtotal * appliedDiscount / 100) : 0;
+      const discountedSub = subtotal - discountAmt;
+      const shipping = discountedSub >= 999 ? 0 : 79;
+      const total = Math.round(discountedSub + shipping);
+
+      container.innerHTML = `
+        <div class="col-lg-8">
+          <div class="cart-table">${itemsHTML}</div>
+          <div style="margin-top:16px;">
+            <a href="products.html" style="font-size:13px;color:var(--clr-mid);letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;">
+              ← Continue Shopping
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="cart-summary">
+            <h5 style="font-family:var(--ff-display);font-size:22px;font-weight:400;margin-bottom:24px;">Order Summary</h5>
+
+            <div class="coupon-row">
+              <input type="text" class="coupon-input" id="couponInput" placeholder="Enter coupon code" />
+              <button class="coupon-btn" onclick="applyCoupon()">Apply</button>
+            </div>
+            ${appliedDiscount > 0 ? `<p style="font-size:12px;color:green;margin-bottom:16px;">✓ ${appliedDiscount}% discount applied!</p>` : ''}
+
+            <div class="summary-row"><span>Subtotal</span><span>${fmt(subtotal)}</span></div>
+            ${discountAmt > 0 ? `<div class="summary-row"><span>Discount (${appliedDiscount}%)</span><span style="color:#c0392b;">−${fmt(discountAmt)}</span></div>` : ''}
+            <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? '<span style="color:green">Free</span>' : fmt(shipping)}</span></div>
+            ${shipping > 0 ? `<p style="font-size:12px;color:var(--clr-accent);margin-bottom:16px;">Add ${fmt(999 - discountedSub)} more for free shipping</p>` : ''}
+            <div class="summary-total"><span>Total</span><span>${fmt(total)}</span></div>
+
+            <div style="margin-top:10px;font-size:11px;color:#888;text-align:center;">Incl. of all taxes &amp; GST</div>
+
+            <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
+              <button class="btn-primary" onclick="openCheckout(${total})" style="width:100%;justify-content:center;">
+                Proceed to Checkout <i class="bi bi-arrow-right"></i>
+              </button>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-size:11px;color:rgba(0,0,0,0.4);letter-spacing:.05em;">
+                🔒 Secure checkout &nbsp; · &nbsp; 📲 UPI / Card / COD
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function changeQty(id, qty) {
+      qty = parseInt(qty);
+      if (qty < 1) { removeItem(id); return; }
+      CartManager.updateQty(id, qty);
+      updateCartBadge();
+      renderCart();
+    }
+
+    function removeItem(id) {
+      CartManager.remove(id);
+      updateCartBadge();
+      renderCart();
+    }
+
+    function applyCoupon() {
+      const input = document.getElementById('couponInput');
+      if (!input) return;
+      const code = input.value.trim().toUpperCase();
+      if (COUPONS[code]) {
+        appliedDiscount = COUPONS[code];
+        renderCart();
+        showToast(`Coupon applied: ${appliedDiscount}% off!`);
+      } else {
+        showToast('Invalid coupon code.', 'error');
+      }
+    }
+
+    /* ── Checkout Modal ── */
+    function openCheckout(total) {
+      const overlay = document.getElementById('checkoutOverlay');
+      const cart = CartManager.get();
+      // Fill mini summary
+      const subtotal = parseFloat(CartManager.total());
+      const discountAmt = appliedDiscount > 0 ? Math.round(subtotal * appliedDiscount / 100) : 0;
+      const discountedSub = subtotal - discountAmt;
+      const shipping = discountedSub >= 999 ? 0 : 79;
+      const finalTotal = Math.round(discountedSub + shipping);
+      document.getElementById('coMiniSummary').innerHTML = `
+        <div class="s-row"><span>${cart.length} item(s)</span><span>${fmt(subtotal)}</span></div>
+        ${discountAmt > 0 ? `<div class="s-row"><span>Discount</span><span style="color:#c0392b;">−${fmt(discountAmt)}</span></div>` : ''}
+        <div class="s-row"><span>Shipping</span><span>${shipping === 0 ? '<span style="color:green">Free</span>' : fmt(shipping)}</span></div>
+        <div class="s-total"><span>Total</span><span>${fmt(finalTotal)}</span></div>`;
+      // Show/hide UPI field
+      toggleUpiField();
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkoutOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('coClose').addEventListener('click', closeCheckout);
+    document.getElementById('checkoutOverlay').addEventListener('click', e => {
+      if (e.target === document.getElementById('checkoutOverlay')) closeCheckout();
+    });
+
+    // UPI field toggle
+    function toggleUpiField() {
+      const selected = document.querySelector('input[name="payMethod"]:checked');
+      document.getElementById('upiField').style.display = selected && selected.value === 'upi' ? 'block' : 'none';
+    }
+    document.querySelectorAll('input[name="payMethod"]').forEach(r => r.addEventListener('change', toggleUpiField));
+
+    /* ── Checkout Form Validation ── */
+    function coSetErr(id, msg) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = msg;
+    }
+    function coMarkInput(id, valid) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('is-error', !valid);
+      el.classList.toggle('is-valid', valid);
+    }
+    function coClearAll() {
+      ['co-name','co-phone','co-email','co-addr1','co-city','co-state','co-pin','co-upi'].forEach(id => {
+        coSetErr(id+'-err', '');
+        const el = document.getElementById(id);
+        if (el) { el.classList.remove('is-error','is-valid'); }
+      });
+      coSetErr('co-pay-err','');
+    }
+
+    document.getElementById('coSubmit').addEventListener('click', () => {
+      coClearAll();
+      let ok = true;
+
+      const name  = (document.getElementById('co-name').value||'').trim();
+      const phone = (document.getElementById('co-phone').value||'').trim();
+      const email = (document.getElementById('co-email').value||'').trim();
+      const addr1 = (document.getElementById('co-addr1').value||'').trim();
+      const city  = (document.getElementById('co-city').value||'').trim();
+      const state = (document.getElementById('co-state').value||'').trim();
+      const pin   = (document.getElementById('co-pin').value||'').trim();
+      const pay   = (document.querySelector('input[name="payMethod"]:checked')||{}).value;
+      const upi   = (document.getElementById('co-upi').value||'').trim();
+
+      // Name
+      if (!name || name.length < 2) { coSetErr('co-name-err','Please enter your full name'); coMarkInput('co-name',false); ok=false; } else coMarkInput('co-name',true);
+      // Phone
+      if (!phone) { coSetErr('co-phone-err','Mobile number is required'); coMarkInput('co-phone',false); ok=false; }
+      else if (!/^(\+91[\-\s]?)?[6-9]\d{9}$/.test(phone.replace(/\s/g,''))) { coSetErr('co-phone-err','Enter a valid 10-digit Indian mobile number'); coMarkInput('co-phone',false); ok=false; }
+      else coMarkInput('co-phone',true);
+      // Email
+      if (!email) { coSetErr('co-email-err','Email address is required'); coMarkInput('co-email',false); ok=false; }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { coSetErr('co-email-err','Enter a valid email address'); coMarkInput('co-email',false); ok=false; }
+      else coMarkInput('co-email',true);
+      // Address
+      if (!addr1 || addr1.length < 5) { coSetErr('co-addr1-err','Please enter your full address'); coMarkInput('co-addr1',false); ok=false; } else coMarkInput('co-addr1',true);
+      // City
+      if (!city) { coSetErr('co-city-err','City is required'); coMarkInput('co-city',false); ok=false; } else coMarkInput('co-city',true);
+      // State
+      if (!state) { coSetErr('co-state-err','Please select your state'); coMarkInput('co-state',false); ok=false; } else coMarkInput('co-state',true);
+      // PIN
+      if (!pin) { coSetErr('co-pin-err','PIN code is required'); coMarkInput('co-pin',false); ok=false; }
+      else if (!/^\d{6}$/.test(pin)) { coSetErr('co-pin-err','Enter a valid 6-digit PIN code'); coMarkInput('co-pin',false); ok=false; }
+      else coMarkInput('co-pin',true);
+      // UPI
+      if (pay === 'upi') {
+        if (!upi) { coSetErr('co-upi-err','UPI ID is required'); coMarkInput('co-upi',false); ok=false; }
+        else if (!/^[\w.\-]+@[\w]+$/.test(upi)) { coSetErr('co-upi-err','Enter a valid UPI ID (e.g. name@upi)'); coMarkInput('co-upi',false); ok=false; }
+        else coMarkInput('co-upi',true);
+      }
+
+      if (!ok) return;
+
+      // Success!
+      document.getElementById('coForm').style.display = 'none';
+      document.getElementById('coSuccess').style.display = 'block';
+      CartManager.save([]);
+      updateCartBadge();
+      setTimeout(() => { renderCart(); }, 500);
+    });
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+</body>
+</html>
